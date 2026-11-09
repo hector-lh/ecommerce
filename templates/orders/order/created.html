@@ -1,0 +1,12 @@
+<!-- templates/orders/order/created.html -->
+
+{% extends "base.html" %}
+
+{% block title %}Thank You{% endblock %}
+
+{% block content %}
+    <h2>Thank You for Your Order!</h2>
+    <p>Your order has been successfully placed.</p>
+    <p>Your order ID is: <strong>#{{ order.id }}</strong></p>
+    <p><a href="{% url 'shop:product_list' %}">Return to Home / Shop</a></p>
+{% endblock %}

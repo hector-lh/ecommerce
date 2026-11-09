@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+    <h2>{{ product.name }}</h2>
+    <p>
+        <strong>Category:</strong>
+        <a href="{{ product.category.get_absolute_url }}">
+            {{ product.category.name }}
+        </a>
+    </p>
+
+    {% if product.image %}
+        <p><img src="{{ product.image.url }}" alt="{{ product.name }}" width="200"></p>
+    {% endif %}
+
+    <p><strong>Price:</strong> ${{ product.price }}</p>
+
+    <form action="{% url 'cart:cart_add' product.id %}" method="post">
+        {% csrf_token %}
+        {{ cart_product_form.as_p }}
+        <input type="submit" value="Add to Cart">
+    </form>
+
+    <hr>
+    <h3>Description</h3>
+    <p>{{ product.description|linebreaks }}</p>
+{% endblock %}

@@ -1,0 +1,23 @@
+<!-- templates/orders/orde/create.html -->
+
+{% extends "base.html" %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+    <h2>Checkout</h2>
+    <h3>Your Order Summary</h3>
+    <ul>
+        {% for item in cart %}
+            <li>
+                {{ item.quantity }} x {{ item.product.name }} - ${{ item.total_price }}
+            </li>
+        {% endfor %}
+    </ul>
+    <p><strong>Total Cost: ${{ cart.get_total_price }}</strong></p>
+    <hr>
+    <h3>Shipping & Customer Details</h3>
+    <form action="." method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p><input type="submit" value="Place Order"></p>
+    </form>
+{% endblock %}

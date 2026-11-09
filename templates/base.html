@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Shop{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'shop:product_list' %}">My Shop</a></h1>
+        <nav>
+            <p>
+                <strong>Shopping Cart:</strong>
+                {% with total_items=cart|length %}
+                    {% if total_items > 0 %}
+                        <a href="{% url 'cart:cart_detail' %}">
+                            {{ total_items }} item{{ total_items|pluralize }}, $ {{ cart.get_total_price }}
+                        </a>
+                    {% else %}
+                        Your cart is empty.
+                    {% endif %}
+                {% endwith %}
+            </p>
+        </nav>
+    </header>
+    <hr>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
